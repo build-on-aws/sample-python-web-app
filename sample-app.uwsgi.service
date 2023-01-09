@@ -1,0 +1,25 @@
+[Unit]
+Description=uWSGI Sample App
+After=syslog.target,network.target,nginx.target
+Requires=network.target,nginx.target
+
+[Service]
+ExecStart=/usr/local/bin/pipenv run uwsgi -s uwsgi.sock --manage-script-name --mount /=application:application --chown-socket=ec2-user:nginx --logto=/var/log/uwsgi/uwsgi.log
+ExecStartPre=/usr/local/bin/pipenv install
+
+# Where your app will be copied
+WorkingDirectory=/var/www/SampleApp
+# This service should run as the ec2-user
+User=ec2-user
+Group=nginx
+
+TimeoutStartSec=0
+RestartSec=10
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
