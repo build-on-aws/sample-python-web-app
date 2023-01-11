@@ -38,13 +38,12 @@ pip3 install uwsgi
 mkdir -p /var/www/SampleApp
 cp $SAMPLE_APP /var/www/SampleApp/SampleApp.zip
 cd /var/www/SampleApp
-unzip SampleApp.zip
+unzip -o SampleApp.zip
 rm SampleApp.zip
-sudo - pipenv install
-usermod -a -G nginx ec2-user
-chown ec2-user:nginx -R ./*
-chown ec2-user:nginx /var/www
-chown ec2-user:nginx /var/www/SampleApp
+/usr/local/bin/pipenv install
+chown nginx:nginx -R ./*
+chown nginx:nginx /var/www
+chown nginx:nginx /var/www/SampleApp
 
 # Install uWSGI as a systemd service, enable it to run at boot, then start it
 #cp $UWSGI_SERVICE_FILE /etc/systemd/system/mywebapp.uwsgi.service
@@ -56,6 +55,8 @@ systemctl start mywebapp.uwsgi.service
 
 # Copy the nginx config file, then ensure nginx starts at boot, and restart it to load the config
 cp nginx-app.conf /etc/nginx/conf.d/nginx-app.conf
+mkdir -p /var/log/nginx
+chown nginx:nginx/var/log/nginx
 systemctl enable nginx.service
 systemctl stop nginx.service
 systemctl restart nginx.service

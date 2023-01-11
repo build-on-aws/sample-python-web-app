@@ -4,13 +4,13 @@ After=syslog.target,network.target,nginx.target
 Requires=network.target,nginx.target
 
 [Service]
-ExecStart=/usr/local/bin/pipenv run uwsgi -s uwsgi.sock --manage-script-name --mount /=application:application --chown-socket=ec2-user:nginx --logto=/var/log/uwsgi/uwsgi.log
+ExecStart=/usr/local/bin/pipenv run uwsgi -s uwsgi.sock --manage-script-name --mount /=application:application --chown-socket=nginx:nginx --logto=/var/log/uwsgi/uwsgi.log
 ExecStartPre=/usr/local/bin/pipenv install
 
 # Where your app will be copied
 WorkingDirectory=/var/www/SampleApp
-# This service should run as the ec2-user
-User=ec2-user
+# This service should run as the nginx
+User=nginx
 Group=nginx
 
 TimeoutStartSec=0
