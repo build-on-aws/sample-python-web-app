@@ -34,6 +34,17 @@ yum install -y nginx python3 python3-pip python3-devel
 pip3 install pipenv wheel
 pip3 install uwsgi
 
+# Install my-web-app into the /home/ec2-user/SampleApp directory
+mkdir -p /var/www/SampleApp
+cp $SAMPLE_APP /var/www/SampleApp/SampleApp.zip
+cd /var/www/SampleApp
+unzip -o SampleApp.zip
+rm SampleApp.zip
+/usr/local/bin/pipenv install
+chown nginx:nginx -R ./*
+chown nginx:nginx /var/www
+chown nginx:nginx /var/www/SampleApp
+
 # Install uWSGI as a systemd service, enable it to run at boot, then start it
 #cp $UWSGI_SERVICE_FILE /etc/systemd/system/mywebapp.uwsgi.service
 cp sample-app.uwsgi.service /etc/systemd/system/mywebapp.uwsgi.service
@@ -49,19 +60,5 @@ chown nginx:nginx /var/log/nginx
 systemctl enable nginx.service
 systemctl stop nginx.service
 systemctl restart nginx.service
-
-# Install my-web-app into the /home/ec2-user/SampleApp directory
-mkdir -p /var/www/SampleApp
-cp $SAMPLE_APP /var/www/SampleApp/SampleApp.zip
-cd /var/www/SampleApp
-unzip -o SampleApp.zip
-rm SampleApp.zip
-/usr/local/bin/pipenv install
-chown nginx:nginx -R ./*
-chown nginx:nginx /var/www
-chown nginx:nginx /var/www/SampleApp
-
-# Need to restart uWSGI after deploying a new app version
-systemctl restart mywebapp.uwsgi.service
 
 echo "Custom configuration for sample application complete."
