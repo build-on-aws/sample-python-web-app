@@ -47,7 +47,7 @@ resource "aws_eip_association" "eip_associate" {
     allocation_id = aws_eip.eip.id
 }
 resource "aws_security_group" "allow_http_SSH" {
-  name        = "allow_HTTP_SSH"
+  name        = "ALLOW_HTTP_SSH"
   description = "Allow http inbound traffic"
 
 
