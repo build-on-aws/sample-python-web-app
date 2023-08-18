@@ -86,7 +86,14 @@ output "ec2instance" {
   value = aws_instance.demo.public_ip
 }
 resource "null_resource" "write_output_to_file" {
-
+provisioner "remote-exec" {
+  inline=["echo 'wait until SSH is ready'"]
+   connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    private_key = file("tfkey")
+    host     = aws_instance.demo.public_ip
+  }
   provisioner "local-exec" {
     command =<<-EOF
       sleep 50
