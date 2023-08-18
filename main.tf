@@ -33,7 +33,7 @@ tags= {
 
     }
    provisioner "local-exec" {
-    command = "echo $(aww_instance.demo.public_ip)" > inventory
+    command = "echo $(aws_instance.demo.public_ip)" > inventory
   }
 }
 //create Elastic IP
