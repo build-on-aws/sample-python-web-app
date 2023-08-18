@@ -85,4 +85,12 @@ resource "aws_security_group" "allow_http_SSH" {
 output "ec2instance" {
   value = aws_instance.demo.public_ip
 }
+resource "null_resource" "write_output_to_file" {
+  triggers = {
+    ec2instance = aws_instance.demo.public_ip
+  }
 
+  provisioner "local-exec" {
+    command = "echo '${aws_instance.demo.public_ip}' > output.txt"
+  }
+}
