@@ -27,13 +27,7 @@ resource "aws_instance" "demo"{
     sudo yum update -y
     sudo amazon-linux-extras install ansible2 -y
     EOF
-
-
-
-
-
-
-    tags= {
+tags= {
         Name = "Task"
 
     }
