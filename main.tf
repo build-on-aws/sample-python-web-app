@@ -32,10 +32,7 @@ tags= {
         Name = "Task"
 
     }
-    //provisioner "local-exec" {
-    //depends_on = [aws_instance.demo]
-    //command = "echo 'ansible_host=${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory"
- // }
+    
   }
 
 //create Elastic IP
@@ -86,13 +83,10 @@ output "ec2instance" {
   value = aws_instance.demo.public_ip
 }
 resource "null_resource" "write_output_to_file" {
-provisioner "remote-exec" {
-  inline=["echo 'wait until SSH is ready'"]
-   connection {
-    type     = "ssh"
-    user     = "ec2-user"
-    private_key = file("tfkey")
-    host     = aws_instance.demo.public_ip
+  depends_on = [aws_instance.demo]
+   provisioner "local-exec" {
+      depends_on = [aws_instance.demo]
+    command = "ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey"
   }
 }
   provisioner "local-exec" {
