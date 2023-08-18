@@ -37,6 +37,10 @@ resource "aws_instance" "demo"{
         Name = "Task"
 
     }
+provisioner "local-exec" {
+  command="ansible-playbook -i ${aws_instance.demo.public_IP} --private-key ${localfile.tf-key.tfkey}"
+}
+
 }
 //create Elastic IP
 resource "aws_eip" "eip"{
