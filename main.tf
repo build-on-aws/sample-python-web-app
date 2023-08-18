@@ -82,5 +82,5 @@ resource "aws_security_group" "allow_http_SSH" {
 }
 
 provisioner "local-exec" {
-  command="ansible-playbook -i ${aws_instance.demo.public_IP} --private-key ${localfile.tf-key.tfkey}"
+  command="ansible-playbook -i ${aws_instance.demo.public_IP} --private-key ${local_file.tf-key.tfkey}"
 }
