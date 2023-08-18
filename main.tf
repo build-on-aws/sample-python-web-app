@@ -36,7 +36,7 @@ tags= {
     command = "echo 'ec2-instance ansible_host=${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory"
   }
   }
-}
+
 //create Elastic IP
 resource "aws_eip" "eip"{
     vpc = true
