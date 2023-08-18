@@ -33,7 +33,7 @@ tags= {
 
     }
     provisioner "local-exec" {
-    command = "echo 'ec2-instance ansible_host=${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory"
+    command = "echo 'ansible_host=${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory"
   }
   }
 
