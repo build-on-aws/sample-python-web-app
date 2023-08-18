@@ -32,6 +32,9 @@
       with_items:
         - wheel
         - uwsgi
+        - boto
+        - boto3
+        - botocore
     - name: Start Nginx service
       systemd:
         name: nginx
