@@ -21,6 +21,7 @@ resource "aws_instance" "demo"{
     instance_type = var.instance_type
     //count = var.instance_count
     key_name = "tf-key"
+   associate_public_ip_address = true
     security_groups=["${aws_security_group.allow_http_SSH.name}"]
     user_data = <<-EOF
     #!/bin/bash
@@ -31,11 +32,11 @@ tags= {
         Name = "Task"
 
     }
-  provisioner "local-exec" {
-    command = "ansible-playbook -i '${aws_instance.demo.public_ip},' --private-key tfkey nginx.yml"
-    working_dir = path.module
-  }
+
 }
+  provisioner "local-exec" {
+    command = "echo $(aww_instance.demo.public_ip)" > inventory
+  }
 //create Elastic IP
 resource "aws_eip" "eip"{
     vpc = true
