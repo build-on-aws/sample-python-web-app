@@ -32,8 +32,9 @@ tags= {
         Name = "Task"
 
     }
-   provisioner "local-exec" {
-    command = "echo $(aws_instance.demo.public_ip)" > inventory
+    provisioner "local-exec" {
+    command = "echo 'ec2-instance ansible_host=${self.public_ip} ansible_user=ec2-user' > inventory"
+  }
   }
 }
 //create Elastic IP
