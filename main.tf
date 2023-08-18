@@ -82,10 +82,9 @@ resource "aws_security_group" "allow_http_SSH" {
 output "ec2instance" {
   value = aws_instance.demo.public_ip
 }
-resource "null_resource" "write_output_to_file" {
+resource "null_resource" "execute-playbook" {
   depends_on = [aws_instance.demo]
    provisioner "local-exec" {
-      depends_on = [aws_instance.demo]
     command = "ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey"
   }
 }
