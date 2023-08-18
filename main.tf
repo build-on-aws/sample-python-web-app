@@ -88,10 +88,4 @@ resource "null_resource" "execute-playbook" {
     command = "ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey"
   }
 }
-  provisioner "local-exec" {
-    command =<<-EOF
-      sleep 50
-      echo '${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory.txt
-    EOF
-  }
-}
+  
