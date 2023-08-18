@@ -31,9 +31,9 @@ tags= {
         Name = "Task"
 
     }
-provisioner "local-exec" {
-    command = "ssh -i tfkey ec2-user@${self.public_ip} 'echo Hello from remote-exec'"
-    command = "ansible-playbook nginx.yml"
+  provisioner "local-exec" {
+    command = "ansible-playbook -i '${aws_instance.demo.public_ip},' --private-key tfkey nginx.yml"
+    working_dir = path.module
   }
 }
 //create Elastic IP
