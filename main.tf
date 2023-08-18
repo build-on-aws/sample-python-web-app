@@ -32,9 +32,8 @@ tags= {
 
     }
 provisioner "local-exec" {
-  command="ansible-playbook -i ${aws_instance.demo.public_IP} --private-key ${localfile.tf-key.tfkey}"
-}
-
+    command = "ssh -i tfkey ec2-user@${self.public_ip}"
+  }
 }
 //create Elastic IP
 resource "aws_eip" "eip"{
@@ -81,6 +80,4 @@ resource "aws_security_group" "allow_http_SSH" {
   }
 }
 
-provisioner "local-exec" {
-  command="ansible-playbook -i ${aws_instance.demo.public_IP} --private-key ${local_file.tf-key.tfkey}"
-}
+
