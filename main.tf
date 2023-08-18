@@ -88,6 +88,7 @@ output "ec2instance" {
 resource "null_resource" "write_output_to_file" {
 
   provisioner "local-exec" {
+    command = "sleep 50"
     command = "echo '${aws_instance.demo.public_ip} ansible_user=ec2-user' > inventory.txt"
   }
 }
