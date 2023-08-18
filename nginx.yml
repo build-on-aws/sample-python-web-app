@@ -1,0 +1,40 @@
+---
+- name: Install required softwares on Amazon Linux
+  hosts: all
+  become: yes             
+  tasks:
+    - name: Update package cache
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+      become: yes
+
+    - name: Install multiple packages using yum
+      ansible.builtin.yum:
+       name: "{{ item }}"
+       state: present
+      with_items:
+        - nginx
+        - python3-devel
+        - python3
+        - python3-pip
+        - python3-devel
+    - name: Install the 'Development tools' package group
+      ansible.builtin.yum:
+        name: "@Development tools"
+        state: present
+
+    - name: Install required python modules
+      ansible.builtin.pip:
+        name: "{{ item }}"
+        state: latest
+        executable: pip3
+      with_items:
+        - wheel
+        - uwsgi
+    - name: Start Nginx service
+      systemd:
+        name: nginx
+        enabled: yes
+        state: started
+      become: yes
