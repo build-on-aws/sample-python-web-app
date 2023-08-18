@@ -32,7 +32,7 @@ tags= {
 
     }
 provisioner "local-exec" {
-    command = "ssh -i tfkey ec2-user@${self.public_ip}"
+    command = "ssh -i tfkey ec2-user@${self.public_ip} 'echo Hello from remote-exec'"
   }
 }
 //create Elastic IP
