@@ -32,11 +32,10 @@ tags= {
         Name = "Task"
 
     }
-
-}
-  provisioner "local-exec" {
+   provisioner "local-exec" {
     command = "echo $(aww_instance.demo.public_ip)" > inventory
   }
+}
 //create Elastic IP
 resource "aws_eip" "eip"{
     vpc = true
