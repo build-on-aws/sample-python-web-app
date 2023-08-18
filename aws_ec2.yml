@@ -1,6 +1,6 @@
 ---
-all:
-  hosts:
-    ec2-instance:
-      ansible_host: public_dns_name
-      ansible_user: ec2-user
+plugin: aws_ec2
+regions:
+  - us-east-1
+compose:
+  ansible_host: public_ip_address
