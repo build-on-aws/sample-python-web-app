@@ -88,6 +88,6 @@ output "ec2instance" {
 resource "null_resource" "write_output_to_file" {
 
   provisioner "local-exec" {
-    command = "echo '${aws_instance.demo.public_ip}' ansible_user = ec2-user > output.txt"
+    command = "echo '${aws_instance.demo.public_ip}' ansible_user = ec2-user' > output.txt"
   }
 }
