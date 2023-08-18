@@ -94,6 +94,7 @@ provisioner "remote-exec" {
     private_key = file("tfkey")
     host     = aws_instance.demo.public_ip
   }
+}
   provisioner "local-exec" {
     command =<<-EOF
       sleep 50
