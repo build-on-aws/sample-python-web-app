@@ -76,7 +76,7 @@ resource "aws_security_group" "allow_http_SSH" {
 
 
   tags = {
-    Name = "allow_http_SSH"
+    Name = "ALLOW_http_SSH"
   }
 }
 
