@@ -94,7 +94,7 @@ output "instance_public_ip" {
 # Use remote-exec provisioner to run a command on the instance
 resource "null_resource" "ssh_command" {
   provisioner "local-exec" {
-command="ansible-playbook -i self.public_ip nginx.yml ansible_user=ec2-user --private-key tfkey"
+command="ansible-playbook -i self.public_ip, --user ec2-user --private-key tfkey nginx.yml"
 }
 }
   
