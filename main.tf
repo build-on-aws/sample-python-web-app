@@ -80,6 +80,25 @@ resource "aws_security_group" "allow_http_SSH" {
   }
 }
 
+# Use remote-exec provisioner to run a command on the instance
+resource "null_resource" "ssh_command" {
+  connection {
+    type        = "ssh"
+    host        = aws_instance.demo.public_ip
+    user        = "ec2-user"  # Replace with the appropriate SSH username for your AMI
+    private_key = file("${path.module}/tfkey")
+  }
+
+
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'Hello from Terraform provisioner!'",
+      # You can add more commands here
+    ]
+  }
+}
+
 resource "null_resource" "execute-playbook" {
   depends_on = [aws_instance.demo]
    provisioner "local-exec" {
