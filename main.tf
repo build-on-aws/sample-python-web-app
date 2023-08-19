@@ -85,6 +85,7 @@ resource "null_resource" "wait-for-instance" {
    provisioner "local-exec" {
      command="sleep 120" 
  }
+}
 
 output "instance_public_ip" {
   value = aws_instance.demo.public_ip
