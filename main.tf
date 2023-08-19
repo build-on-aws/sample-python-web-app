@@ -86,7 +86,7 @@ resource "null_resource" "execute-playbook" {
      command="sleep 120" 
  }
 provisioner "local-exec" {
-command="ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey"
+command="ansible-playbook -i self.public_ip nginx.yml --private-key tfkey"
 }
 }
   
