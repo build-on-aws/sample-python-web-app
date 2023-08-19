@@ -83,9 +83,10 @@ resource "aws_security_group" "allow_http_SSH" {
 resource "null_resource" "execute-playbook" {
   depends_on = [aws_instance.demo]
    provisioner "local-exec" {
-    inline = [
-    "sleep 120; ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey" 
-  ]
-  }
+     command="sleep 120" 
+ }
+provisioner "local-exec" {
+command="ansible-playbook -i '${aws_instance.demo.public_ip}' nginx.yml --private-key tfkey"
+}
 }
   
