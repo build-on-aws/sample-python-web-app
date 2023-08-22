@@ -27,6 +27,7 @@ resource "aws_instance" "demo"{
     #!/bin/bash
     sudo yum update -y
     sudo amazon-linux-extras install ansible2 -y
+    sudo yum install -y git
     git clone https://github.com/Kavya5991/sample-python-web-app.git .
     chmod +x nginx.yml
     ansible-playbook -i localhost nginx.yml
