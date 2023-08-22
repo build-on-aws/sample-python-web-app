@@ -1,6 +1,6 @@
 ---
 - name: Install required softwares on Amazon Linux
-  hosts: all
+  hosts: localhost
   become: yes             
   tasks:
     - name: Update package cache
