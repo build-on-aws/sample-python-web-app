@@ -14,11 +14,14 @@
        name: "{{ item }}"
        state: present
       with_items:
-        - nginx
         - python3-devel
         - python3
         - python3-pip
         - python3-devel
+    - name: Install Nginx from Amazon Linux Extras
+      ansible.builtin.amazon_linux_extras:
+        name: nginx1
+        state: present
     - name: Install the 'Development tools' package group
       ansible.builtin.yum:
         name: "@Development tools"
