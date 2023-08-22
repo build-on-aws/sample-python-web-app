@@ -31,6 +31,7 @@ resource "aws_instance" "demo"{
     chmod +x nginx.yml
     ansible-playbook -i localhost nginx.yml
     EOF
+
 tags= {
         Name = "Task"
 
