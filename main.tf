@@ -27,6 +27,7 @@ resource "aws_instance" "demo"{
     #!/bin/bash
     sudo yum update -y
     sudo amazon-linux-extras install ansible2 -y
+    sudo ansible-playbook nginx.yml
     EOF
 tags= {
         Name = "Task"
