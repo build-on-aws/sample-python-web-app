@@ -80,23 +80,23 @@ resource "aws_security_group" "allow_http_SSH" {
   }
 }
 
-resource "null_resource" "wait-for-instance" {
-  depends_on = [aws_instance.demo]
-   provisioner "local-exec" {
-     command="sleep 120" 
- }
-}
+//resource "null_resource" "wait-for-instance" {
+ // depends_on = [aws_instance.demo]
+  // provisioner "local-exec" {
+   //  command="sleep 120" 
+ //}
+//}
 
-output "instance_public_ip" {
-  value = aws_instance.demo.public_ip
-}
+//output "instance_public_ip" {
+  //value = aws_instance.demo.public_ip
+//}
 
-# Use remote-exec provisioner to run a command on the instance
-resource "null_resource" "ssh_command" {
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.demo.public_ip}, --user ec2-user --private-key tfkey nginx.yml"
-  }
-}
+//# Use remote-exec provisioner to run a command on the instance
+//resource "null_resource" "ssh_command" {
+  //provisioner "local-exec" {
+    //command = "ansible-playbook -i ${aws_instance.demo.public_ip}, --user ec2-user --private-key tfkey nginx.yml"
+  //}
+//}
 
 
 
