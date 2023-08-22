@@ -29,7 +29,7 @@ resource "aws_instance" "demo"{
     sudo amazon-linux-extras install ansible2 -y
     git clone https://github.com/Kavya5991/sample-python-web-app.git /tmp/ansible-playbook
     chmod +x /tmp/ansible-playbook/nginx.yml
-    sudo ansible-playbook -i localhost /tmp/ansible-playbook/nginx.yml
+    ansible-playbook -i localhost /tmp/ansible-playbook/nginx.yml
     EOF
 tags= {
         Name = "Task"
