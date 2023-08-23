@@ -1,0 +1,23 @@
+---
+- name: Deploy Python Flask App
+  hosts: localhost # Replace with the name of your EC2 instance group or IP address
+  
+  vars:
+    app_name: sample-python-app
+    app_repo: git@github.com:Kavya5991/sample-python-web-app.git
+    app_directory: /home/ec2-user/app
+
+  tasks:
+    - name: Clone Git Repository
+      git:
+        repo: "{{ app_repo }}"
+        dest: "{{ app_directory }}"
+
+    - name: Start Application
+      shell: |
+        cd "{{ app_directory }}"
+        python application.py
+      args:
+        executable: /bin/bash
+      become: yes
+      become_user: ec2-user
