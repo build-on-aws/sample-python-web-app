@@ -31,6 +31,7 @@ resource "aws_instance" "demo"{
     git clone https://github.com/Kavya5991/sample-python-web-app.git /home/ec2-user/app
     chmod +x /home/ec2-user/app/nginx.yml
     ansible-playbook -i localhost /home/ec2-user/app/nginx.yml
+    ansible-playbook -i localhost /home/ec2-user/app/python_deploy.yml
     EOF
 
 tags= {
