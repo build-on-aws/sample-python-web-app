@@ -2,11 +2,7 @@ FROM nginx
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential python3 python3-pip python3-dev
-#RUN pip3 install pipenv 
-RUN python3 -m venv myenv && \
-    . /myenv/bin/activate && \
-    pip install pipenv
-    
+RUN pip3 install pipenv 
 # install our code
 ADD . /home/docker/code/
 
