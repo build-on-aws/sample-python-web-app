@@ -18,10 +18,9 @@
         - python3
         - python3-pip
         - python3-devel
-    - name: Install Nginx from Amazon Linux Extras
-      ansible.builtin.amazon_linux_extras:
-        name: nginx1
-        state: present
+    - name: Install java11
+      ansible.builtin.command:
+        cmd: amazon-linux-extras install nginx1 -y
     - name: Install the 'Development tools' package group
       ansible.builtin.yum:
         name: "@Development tools"
